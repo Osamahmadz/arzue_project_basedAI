@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waste Management Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .data-row {
+            margin-bottom: 15px;
+        }
+        .data-row h2 {
+            margin: 0;
+            color: #444;
+        }
+        .data-row p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Waste Management Dashboard</h1>
+
+    <div id="dashboard"></div>
+
+    <script>
+        // This is a static data. In a real app, you would fetch this from your server
+        var wasteData = [
+            { category: 'Recyclable Waste', amount: 1500 },
+            { category: 'Compostable Waste', amount: 1000 },
+            { category: 'Landfill Waste', amount: 1200 },
+        ];
+
+        // Simulate fetching data from server
+        function fetchData() {
+            return new Promise((resolve) => {
+                setTimeout(() => resolve(wasteData), 1000);
+            });
+        }
+
+        function displayData(data) {
+            const dashboard = document.getElementById('dashboard');
+
+            data.forEach(item => {
+                const dataRow = document.createElement('div');
+                dataRow.classList.add('data-row');
+
+                const title = document.createElement('h2');
+                title.textContent = item.category;
+
+                const amount = document.createElement('p');
+                amount.textContent = `Amount: ${item.amount} kg`;
+
+                dataRow.appendChild(title);
+                dataRow.appendChild(amount);
+
+                dashboard.appendChild(dataRow);
+            });
+        }
+
+        // Fetch and display data
+        fetchData().then(displayData);
+    </script>
+</body>
+</html>
